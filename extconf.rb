@@ -7,6 +7,10 @@ use_mecab_config = enable_config('mecab-config')
   have_library(lib)
 }
 
+dir_config('mecab',
+    `mecab-config --inc-dir`.strip,
+    `mecab-config --libs-only-L`.strip)
+
 $CFLAGS += ' ' + `#{mecab_config} --cflags`.chomp
 
 have_header('mecab.h') && create_makefile('MeCab')
